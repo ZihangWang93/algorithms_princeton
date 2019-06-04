@@ -35,7 +35,7 @@ public class Percolation {
     // open the site if it is not opened yet
     public void open(int row, int col) {
         int index = xyTo1D(row, col);
-        isValid(index);
+        isValid(row, col);
         if (!id[index]) {
             id[index] = true;
             connectLeft(index);
@@ -48,15 +48,14 @@ public class Percolation {
 
     // check if specific site is open
     public boolean isOpen(int row, int col) {
-        int index = xyTo1D(row, col);
-        isValid(index);
-        return id[index];
+        isValid(row, col);
+        return id[xyTo1D(row, col)];
     }
 
     // check if specific site is full
     public boolean isFull(int row, int col) {
         int index = xyTo1D(row, col);
-        isValid(index);
+        isValid(row, col);
         return ufBottom.connected(index, 0);
     }
 
@@ -67,7 +66,7 @@ public class Percolation {
 
     // return if this system percolate
     public boolean percolates() {
-        return ufTop.find(dim * dim + 1) == ufTop.find(ufBottom.find(0));
+        return ufTop.connected(dim * dim + 1, 0);
     }
 
     // helper method transfer a 2D (row, col) data into 1D data
@@ -76,8 +75,8 @@ public class Percolation {
     }
 
     // helper method to verify the indice is valid or not
-    private void isValid(int index) {
-        if (index <= 0 || index > dim * dim) {
+    private void isValid(int row, int col) {
+        if (row <= 0 || row > dim || col <= 0 || col > dim) {
             throw new java.lang.IllegalArgumentException(
                     "Unexpected index less than 0 or bigger than n^2");
         }
@@ -111,6 +110,7 @@ public class Percolation {
     private void connectDown(int cur) {
         if (cur > 0 && cur <= dim) {
             ufBottom.union(cur, 0);
+            ufTop.union(cur, 0);
         }
         else if (id[cur - dim]) {
             ufTop.union(cur, cur - dim);
