@@ -11,7 +11,6 @@ public class PercolationStats {
 
     // instance varialbes for PercolationStats
     private int trials;
-    private Percolation pclt;
     private double[] thresholds;
 
     // PercolationStats Construction
@@ -25,7 +24,7 @@ public class PercolationStats {
         thresholds = new double[trials];
 
         for (int i = 0; i < trials; i++) {
-            pclt = new Percolation(n);
+            Percolation pclt = new Percolation(n);
             int num = 0;
             while (!pclt.percolates()) {
                 int row = StdRandom.uniform(1, n + 1);
