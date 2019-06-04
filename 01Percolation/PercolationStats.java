@@ -12,6 +12,8 @@ public class PercolationStats {
     // instance varialbes for PercolationStats
     private int trials;
     private double[] thresholds;
+    private double mean;
+    private double stddev;
 
     // PercolationStats Construction
     public PercolationStats(int n, int t) {
@@ -40,22 +42,24 @@ public class PercolationStats {
 
     // return the double mean of all the thresholds
     public double mean() {
-        return StdStats.mean(thresholds);
+        this.mean = StdStats.mean(thresholds);
+        return this.mean;
     }
 
     // return the standard deviation of all the thresholds
     public double stddev() {
-        return StdStats.stddev(thresholds);
+        this.stddev = StdStats.stddev(thresholds);
+        return this.stddev;
     }
 
     // return the low endpoint of 95% confidence interval
     public double confidenceLo() {
-        return mean() - 1.96 * stddev() / Math.sqrt(trials);
+        return this.mean - 1.96 * this.stddev / Math.sqrt(trials);
     }
 
     // return the high endpoint of 95% confidence interval;
     public double confidenceHi() {
-        return mean() + 1.96 * stddev() / Math.sqrt(trials);
+        return this.mean + 1.96 * this.stddev / Math.sqrt(trials);
     }
 
     public static void main(String[] args) {
