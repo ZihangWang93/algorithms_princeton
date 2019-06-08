@@ -12,19 +12,15 @@ public class Permutation {
 
     public static void main(String[] args) {
         int numToRead = Integer.parseInt(args[0]);
-        String[] allStrings = StdIn.readAllStrings();
-        int numTotal = allStrings.length;
-        Deque<String> deque = new Deque<>();
-        if (numToRead > numTotal) {
-            throw new IllegalArgumentException(" the input is bigger than the total length ");
-        }
-        for (int i = 0; i < numToRead; i++) {
-            int index = StdRandom.uniform(numTotal);
-            deque.addLast(allStrings[index]);
+        RandomizedQueue<String> deque = new RandomizedQueue<>();
+
+        while (!StdIn.isEmpty()) {
+            deque.enqueue(StdIn.readString());
         }
 
-        for (String s : deque) {
-            StdOut.println(s);
+        for (int i = 0; i < numToRead; i++) {
+            int index = StdRandom.uniform(deque.size());
+            StdOut.println(deque.dequeue());
         }
 
     }

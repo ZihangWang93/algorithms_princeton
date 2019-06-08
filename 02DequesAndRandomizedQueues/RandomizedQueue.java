@@ -11,13 +11,13 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
-    private Item[] rQuene;
+    private Item[] rQueue;
     private int size;
     private int last;
 
     public RandomizedQueue() {
         size = 2;
-        rQuene = (Item[]) new Object[size];
+        rQueue = (Item[]) new Object[size];
         last = -1;
     }
 
@@ -37,7 +37,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             incrSize();
             size *= 2;
         }
-        rQuene[++last] = item;
+        rQueue[++last] = item;
     }
 
     public Item dequeue() {
@@ -49,11 +49,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             size /= 2;
         }
         int index = StdRandom.uniform(last + 1);
-        Item toRmove = rQuene[index];
+        Item toRmove = rQueue[index];
         for (int i = index; i < last; i++) {
-            rQuene[i] = rQuene[i + 1];
+            rQueue[i] = rQueue[i + 1];
         }
-        rQuene[last--] = null;
+        rQueue[last--] = null;
         return toRmove;
     }
 
@@ -62,7 +62,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             throw new NoSuchElementException("The queue is empty");
         }
         int index = StdRandom.uniform(last + 1);
-        return rQuene[index];
+        return rQueue[index];
     }
 
     public Iterator<Item> iterator() {
@@ -80,7 +80,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             if (!hasNext()) {
                 throw new NoSuchElementException("There is no more to return");
             }
-            return rQuene[++currentIndex];
+            return rQueue[++currentIndex];
         }
 
         public void remove() {
@@ -91,17 +91,17 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private void incrSize() {
         Item[] rQ = (Item[]) new Object[size * 2];
         for (int i = 0; i <= last; i++) {
-            rQ[i] = rQuene[i];
+            rQ[i] = rQueue[i];
         }
-        rQuene = rQ;
+        rQueue = rQ;
     }
 
     private void decrSize() {
         Item[] rQ = (Item[]) new Object[size / 2];
         for (int i = 0; i <= last; i++) {
-            rQ[i] = rQuene[i];
+            rQ[i] = rQueue[i];
         }
-        rQuene = rQ;
+        rQueue = rQ;
     }
 
 
@@ -109,10 +109,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         RandomizedQueue<Integer> rq = new RandomizedQueue<Integer>();
         for (int i = 0; i <= 10; i++) {
             rq.enqueue(i);
-            System.out.println(Arrays.toString(rq.rQuene));
+            System.out.println(Arrays.toString(rq.rQueue));
             System.out.println(rq.size);
             /*
-            for (Integer j : rq.rQuene) {
+            for (Integer j : rq.rQueue) {
                 System.out.print(j);
                 System.out.println(rq.size);
                 System.out.println(" ");
