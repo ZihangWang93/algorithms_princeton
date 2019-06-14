@@ -10,8 +10,6 @@
 
 import edu.princeton.cs.algs4.StdDraw;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class Point implements Comparable<Point> {
@@ -124,6 +122,7 @@ public class Point implements Comparable<Point> {
      *
      * @return a string representation of this point
      */
+
     public String toString() {
         /* DO NOT MODIFY */
         return "(" + x + ", " + y + ")";
@@ -134,33 +133,33 @@ public class Point implements Comparable<Point> {
      */
     public static void main(String[] args) {
         /* YOUR CODE HERE */
-        Point ori = new Point(0, 0);
-        // Point q1 = new Point(1, 1);
-        // Point q2 = new Point(2, 2);
-        // Point q3 = new Point(1, 2);
-        // Point q4 = new Point(2, 1);
-        ArrayList<Point> p = new ArrayList<>(10);
-        p.add(new Point(0, 0));
-        p.add(new Point(1, 1));
-        p.add(new Point(2, 2));
-        p.add(new Point(1, 2));
-        p.add(new Point(2, 1));
-        for (Point i : p) {
-            i.draw();
-            ori.drawTo(i);
-            System.out.println(
-                    "The slope between origin point to point (" + i.x + ", " + i.y + ") is " + ori
-                            .slopeTo(i));
-        }
-        Collections.sort(p);
-        for (Point i : p) {
-            System.out.println("Points are in y coordinate order: (" + i.x + ", " + i.y + ")");
-        }
-        Collections.sort(p, ori.slopeOrder());
-        for (Point i : p) {
-            System.out
-                    .println("Points are in slope to origin point order: (" + i.x + ", " + i.y
-                                     + ")");
-        }
+    //     Point ori = new Point(0, 0);
+    //     // Point q1 = new Point(1, 1);
+    //     // Point q2 = new Point(2, 2);
+    //     // Point q3 = new Point(1, 2);
+    //     // Point q4 = new Point(2, 1);
+    //     ArrayList<Point> p = new ArrayList<>(10);
+    //     p.add(new Point(0, 0));
+    //     p.add(new Point(1, 1));
+    //     p.add(new Point(2, 2));
+    //     p.add(new Point(1, 2));
+    //     p.add(new Point(2, 1));
+    //     for (Point i : p) {
+    //         i.draw();
+    //         ori.drawTo(i);
+    //         System.out.println(
+    //                 "The slope between origin point to point (" + i.x + ", " + i.y + ") is " + ori
+    //                         .slopeTo(i));
+    //     }
+    //     Collections.sort(p);
+    //     for (Point i : p) {
+    //         System.out.println("Points are in y coordinate order: (" + i.x + ", " + i.y + ")");
+    //     }
+    //     Collections.sort(p, ori.slopeOrder());
+    //     for (Point i : p) {
+    //         System.out
+    //                 .println("Points are in slope to origin point order: (" + i.x + ", " + i.y
+    //                                  + ")");
+    //     }
     }
 }
