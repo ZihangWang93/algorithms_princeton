@@ -53,9 +53,9 @@ public class Solver {
         }
 
         while (!pqSrchNd.min().board.isGoal() && !pqTwSrcNd.min().board.isGoal()) {
-            numMove++;
             SearchNode pre = pqSrchNd.delMin();
             SearchNode twPre = pqTwSrcNd.delMin();
+            numMove = pre.numMove + 1;
             for (Board b : pre.board.neighbors()) {
                 if (pre.predecessor == null || !b.equals(pre.predecessor.board)) {
                     pqSrchNd.insert(new SearchNode(b, numMove, pre));
@@ -83,7 +83,7 @@ public class Solver {
     }
 
     public int moves() {
-        return numMove;
+        return pqSrchNd.min().numMove;
     }
 
     public Iterable<Board> solution() {

@@ -4,8 +4,9 @@
  *  Description: 8 puzzle representation
  **************************************************************************** */
 
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Stack;
-import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.StdOut;
 
 import java.util.Arrays;
 
@@ -69,19 +70,17 @@ public class Board {
 
     public Board twin() {
         int[] twin = this.board.clone();
-        int swtPos1 = StdRandom.uniform(dim * dim);
-        while (twin[swtPos1] == 0) {
-            swtPos1 = StdRandom.uniform(dim * dim);
-        }
 
-        int swtPos2 = StdRandom.uniform(dim * dim);
-        while (twin[swtPos2] == 0 || swtPos2 == swtPos1) {
-            swtPos2 = StdRandom.uniform(dim * dim);
+        if (twin[1] != 0 && twin[0] != 0) {
+            int temp = twin[1];
+            twin[1] = twin[0];
+            twin[0] = temp;
         }
-
-        int temp = twin[swtPos1];
-        twin[swtPos1] = twin[swtPos2];
-        twin[swtPos2] = temp;
+        else {
+            int temp = twin[2];
+            twin[2] = twin[3];
+            twin[3] = temp;
+        }
 
         int[][] twin2D = new int[dim][dim];
         for (int i = 0; i < dim; i++) {
@@ -94,6 +93,9 @@ public class Board {
     }
 
     public boolean equals(Object y) {
+        if (y == null) {
+            return false;
+        }
         if (y.getClass() != this.getClass()) {
             return false;
         }
@@ -155,6 +157,22 @@ public class Board {
     }
 
     public static void main(String[] args) {
+        // create initial board from file
+        In in = new In(args[0]);
+        int n = in.readInt();
+        int[][] blocks = new int[n][n];
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
+                blocks[i][j] = in.readInt();
+        Board initial = new Board(blocks);
 
+        for (int i = 0; i < 1; i++) {
+            initial.neighbors();
+            initial.twin();
+            initial.neighbors();
+            initial.toString();
+            initial.twin();
+        }
+        StdOut.print(initial);
     }
 }
