@@ -14,10 +14,11 @@ public class SAP {
     private final Digraph G;
 
     public SAP(Digraph G) {
+
         if (G == null) {
             throw new IllegalArgumentException("the input is null");
         }
-        this.G = G;
+        this.G = new Digraph(G);
     }
 
     public int length(int v, int w) {
@@ -32,11 +33,17 @@ public class SAP {
     }
 
     public int length(Iterable<Integer> v, Iterable<Integer> w) {
+        if (v == null || w == null) {
+            throw new IllegalArgumentException("The input is null");
+        }
         int[] result = bfsSearch(v, w);
         return result[1];
     }
 
     public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
+        if (v == null || w == null) {
+            throw new IllegalArgumentException("The input is null");
+        }
         int[] result = bfsSearch(v, w);
         return result[0];
     }
