@@ -6,6 +6,7 @@
 
 import edu.princeton.cs.algs4.Digraph;
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.Topological;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -55,6 +56,22 @@ public class WordNet {
             for (int i = 1; i < fields2.length; i++) {
                 G.addEdge(Integer.parseInt(fields2[0]), Integer.parseInt(fields2[i]));
             }
+        }
+
+        Topological t = new Topological(G);
+        if (!t.hasOrder()) {
+            throw new IllegalArgumentException("The input graph is not a rooted graph");
+        }
+
+        int nodeNum = 0;
+        for (int i = 0; i < G.V(); i++) {
+            if (G.outdegree(i) == 0) {
+                nodeNum++;
+            }
+        }
+
+        if (nodeNum != 1) {
+            throw new IllegalArgumentException("The input graph has more than one rooted node");
         }
 
         s = new SAP(G);
