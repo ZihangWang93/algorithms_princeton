@@ -79,6 +79,7 @@ public class WordNet {
     }
 
     public String sap(String nounA, String nounB) {
+        StringBuilder strb = new StringBuilder();
         if (nounA == null || nounB == null || !isNoun(nounA) || !isNoun(nounB)) {
             throw new IllegalArgumentException("input is null or the word is not in the wordNet");
         }
@@ -87,11 +88,11 @@ public class WordNet {
 
         for (String st : nouns()) {
             if (wordNetString.get(st).contains(index)) {
-                return st;
+                strb.append(st);
             }
         }
 
-        return null;
+        return strb.toString();
     }
 
     public static void main(String[] args) {
